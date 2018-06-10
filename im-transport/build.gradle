@@ -12,4 +12,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.19.Final'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'io.protostuff', name: 'protostuff-core', version: '1.6.0'
+    compile group: 'org.objenesis', name: 'objenesis', version: '2.6'
+
+    compile group: 'io.protostuff', name: 'protostuff-runtime', version: '1.6.0'
+
 }
