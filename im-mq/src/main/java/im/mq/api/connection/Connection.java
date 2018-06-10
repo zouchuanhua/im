@@ -1,7 +1,7 @@
 package im.mq.api.connection;
 
 /**
- * Connection
+ * Client
  * Date: 2018-06-09
  *
  * @author zouchuanhua
