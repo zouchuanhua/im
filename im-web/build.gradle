@@ -1,0 +1,39 @@
+plugins {
+    id 'war'
+}
+
+version 'unspecified'
+
+repositories {
+    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}}
+
+war {
+    archiveName = 'im.war'
+}
+
+//bootRun {
+//    addResources = false
+//}
+//
+//springBoot {
+//    mainClass = 'im.web.Application'
+//}
+
+dependencies {
+    compile project (':im-authentication')
+    compile project (':im-transport')
+//    compile 'org.springframework.boot:spring-boot-starter-web:1.5.3.RELEASE'
+//    providedCompile 'org.springframework.boot:spring-boot-starter-tomcat:1.5.3.RELEASE'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+
+
+
+

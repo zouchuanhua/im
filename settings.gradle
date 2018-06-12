@@ -1,3 +1,6 @@
 include 'im-mq'
 include 'im-transport'
+include 'im-authentication'
+include 'im-dao'
+include 'im-web'
 
