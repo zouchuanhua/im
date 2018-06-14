@@ -12,37 +12,25 @@ import io.jsonwebtoken.SignatureException;
  */
 public class TokenGenerate {
 
+    private static final String key = "0913idg91";
 
-    public static void main(String[] args) {
-        String token = Jwts.builder()
-                .setSubject("123")
-                .signWith(SignatureAlgorithm.HS512, "111".getBytes())
-                .compact();
-        System.out.println(token);
-
-
-        try {
-            String subject = Jwts.parser().
-                    setSigningKey("111".getBytes()).
-                    parseClaimsJws("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1Njc4In0=.dp5Nz1sovMxDOLpGnXyjYccMU7n0iLdTjpc4dBCwF3IKmQL0SCzdwPJY0bhw4yTJODeVhssbz_vd5JRXnCv91g")
-            .getBody().getSubject();
-            System.out.println(subject);
-        }catch (SignatureException e) {
-            e.printStackTrace();
-        }
-
+    public static void parser(String token) throws SignatureException {
+        Jwts.parser().setSigningKey(key.getBytes()).parseClaimsJws(token);
     }
 
-    public static void parser(String token) throws SignatureException{
-        Jwts.parser().
-                    setSigningKey("111".getBytes()).
-                    parseClaimsJws(token);
+    public static String getSubject(String token) {
+        return Jwts.parser().setSigningKey(key.getBytes()).parseClaimsJws(token).getBody().getSubject();
     }
 
     public static String token(String s) {
         return Jwts.builder()
                 .setSubject(s)
-                .signWith(SignatureAlgorithm.HS512, "111".getBytes())
+                .signWith(SignatureAlgorithm.HS512, key.getBytes())
                 .compact();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(token("{\"userId\":1234}"));
+        System.out.println(token("{\"userId\":5678}"));
     }
 }
