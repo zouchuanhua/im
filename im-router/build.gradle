@@ -11,5 +11,7 @@ repositories {
 }
 
 dependencies {
+    compile project(":im-common")
+    compile project(":im-cache")
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

@@ -1,8 +1,7 @@
 package im.web.servlet;
 
 import javax.servlet.AsyncContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +43,11 @@ public class MessageReceiveServlet extends HttpServlet {
                 try {
                     asyncContext = QUEUE.take();
                     HttpServletRequest request = (HttpServletRequest) asyncContext.getRequest();
+                    InputStream inputStream = request.getInputStream();
+                    String s = IOUtils.toString(inputStream,"utf-8");
+
+
+
                     ImMessage.Message.Builder builder = ImMessage.Message.newBuilder();
                     ImMessage.Message message = builder.build();
                     MessageHandle.getINSTANCE().send(message);
@@ -53,7 +59,9 @@ public class MessageReceiveServlet extends HttpServlet {
                 } catch (IOException e1) {
                     LOGGER.error("", e1);
                 } finally {
-                    asyncContext.complete();
+                    if (asyncContext != null) {
+                        asyncContext.complete();
+                    }
                 }
             }
         });

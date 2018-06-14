@@ -22,6 +22,7 @@ war {
 dependencies {
     compile project (':im-authentication')
     compile project (':im-transport')
+    compile project (':im-common')
 //    compile 'org.springframework.boot:spring-boot-starter-web:1.5.3.RELEASE'
 //    providedCompile 'org.springframework.boot:spring-boot-starter-tomcat:1.5.3.RELEASE'
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'

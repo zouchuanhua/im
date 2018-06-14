@@ -18,8 +18,15 @@ import okhttp3.Response;
  *
  * @author zouchuanhua
  */
-public class HttpClient {
+public final class HttpClient {
 
+    private static final HttpClient INSTANCE = new HttpClient();
+
+    private HttpClient(){}
+
+    public static HttpClient getINSTANCE() {
+        return INSTANCE;
+    }
 
     private static final OkHttpClient client = new OkHttpClient().newBuilder()
             .connectTimeout(3, TimeUnit.SECONDS)
